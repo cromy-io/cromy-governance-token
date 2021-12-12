@@ -17,6 +17,9 @@ contract CromyGovernanceToken is ERC20, ERC20Burnable, ERC20Capped, ERC20Snapsho
     uint256 public constant INITIAL_SUPPLY = 6662500 * (10 ** 18);
     uint256 public constant MAX_SUPPLY = 50000000 * (10 ** 18);
 
+    event Mint(address indexed to, uint256 amount);
+    event Burn(address indexed from, uint256 amount);
+
     constructor()
         ERC20("Cromy Governance Token", "CMY")
         ERC20Capped(MAX_SUPPLY)
@@ -56,6 +59,7 @@ contract CromyGovernanceToken is ERC20, ERC20Burnable, ERC20Capped, ERC20Snapsho
         internal
         override(ERC20, ERC20Capped, ERC20Votes)
     {
+        emit Mint(to, amount);
         super._mint(to, amount);
     }
 
@@ -64,5 +68,6 @@ contract CromyGovernanceToken is ERC20, ERC20Burnable, ERC20Capped, ERC20Snapsho
         override(ERC20, ERC20Votes)
     {
         super._burn(account, amount);
+        emit Burn(account, amount);
     }
 }
