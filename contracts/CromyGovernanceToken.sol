@@ -14,13 +14,12 @@ contract CromyGovernanceToken is ERC20, ERC20Burnable, ERC20Capped, ERC20Snapsho
     bytes32 public constant SNAPSHOT_ROLE = keccak256("SNAPSHOT_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    uint256 public constant INITIAL_SUPPLY = 6662500 * (10 ** 18);
     uint256 public constant MAX_SUPPLY = 50000000 * (10 ** 18);
 
     event Mint(address indexed to, uint256 amount);
     event Burn(address indexed from, uint256 amount);
 
-    constructor()
+    constructor(uint256 initialSupply)
         ERC20("Cromy Governance Token", "CMY")
         ERC20Capped(MAX_SUPPLY)
         ERC20Permit("Cromy Governance Token")
@@ -28,7 +27,7 @@ contract CromyGovernanceToken is ERC20, ERC20Burnable, ERC20Capped, ERC20Snapsho
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _setupRole(SNAPSHOT_ROLE, msg.sender);
         _setupRole(MINTER_ROLE, msg.sender);
-        _mint(msg.sender, INITIAL_SUPPLY);
+        _mint(msg.sender, initialSupply * (10 ** 18));
     }
 
     function snapshot() public onlyRole(SNAPSHOT_ROLE) {
