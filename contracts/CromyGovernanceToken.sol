@@ -20,7 +20,7 @@ contract CromyGovernanceToken is ERC20, ERC20Burnable, ERC20Capped, ERC20Snapsho
     event Burn(address indexed from, uint256 amount);
 
     constructor(uint256 initialSupply)
-        ERC20("Cromy Governance Token", "CMY")
+        ERC20("Cromy Governance Token", "CROMY")
         ERC20Capped(MAX_SUPPLY)
         ERC20Permit("Cromy Governance Token")
     {
